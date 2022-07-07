@@ -3,6 +3,7 @@ package com.github.gossie.battleship.domain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -12,7 +13,7 @@ public class GameService {
     private final GameRepository gameRepository;
 
     public Game createGame() {
-        return gameRepository.save(new Game(null, new Board(10, 10)));
+        return gameRepository.save(new Game(null, new Board(10, 10, new ArrayList<>())));
     }
 
     public Optional<Game> findGame(String id) {

@@ -1,4 +1,4 @@
 package com.github.gossie.battleship.rest;
 
-public record BoardDTO(FieldDTO[][] fields) {
+record BoardDTO(FieldDTO[][] fields) {
 }

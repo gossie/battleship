@@ -4,7 +4,7 @@ import org.springframework.hateoas.Link;
 
 import java.util.List;
 
-public record GameDTO(String id, BoardDTO board) {
+record GameDTO(String id, BoardDTO board) {
 
     public List<Link> getLinks() {
         return List.of(

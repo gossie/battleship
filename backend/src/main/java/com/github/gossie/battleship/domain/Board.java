@@ -1,4 +1,6 @@
 package com.github.gossie.battleship.domain;
 
-public record Board(int width, int height) {
+import java.util.List;
+
+public record Board(int width, int height, List<Ship> ships) {
 }

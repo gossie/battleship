@@ -1,9 +1,8 @@
 package com.github.gossie.battleship.domain;
 
-import java.util.Optional;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface GameRepository {
-    Game save(Game game);
-
-    Optional<Game> findById(String id);
+@Repository
+public interface GameRepository extends MongoRepository<Game, String> {
 }

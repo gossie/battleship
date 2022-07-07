@@ -1,4 +1,5 @@
 package com.github.gossie.battleship.rest;
 
-public record FieldDTO() {
+record FieldDTO(boolean occupied) {
+
 }
