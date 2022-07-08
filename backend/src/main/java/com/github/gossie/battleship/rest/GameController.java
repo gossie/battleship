@@ -22,7 +22,10 @@ public class GameController {
 
     @GetMapping("/{id}")
     public ResponseEntity<GameDTO> getGame(@PathVariable String id) {
-        return ResponseEntity.of(gameService.findGame(id).map(gameMapper::map));
+        return gameService.findGame(id)
+                .map(gameMapper::map)
+                .map(game -> ResponseEntity.status(HttpStatus.CREATED).body(game))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }
