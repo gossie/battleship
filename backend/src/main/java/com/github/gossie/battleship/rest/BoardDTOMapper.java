@@ -1,29 +1,36 @@
 package com.github.gossie.battleship.rest;
 
 import com.github.gossie.battleship.domain.Board;
-import com.github.gossie.battleship.domain.Point;
+import com.github.gossie.battleship.domain.Position;
 import com.github.gossie.battleship.domain.Ship;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Component
+@RequiredArgsConstructor
 class BoardDTOMapper {
-    public BoardDTO map(Board board) {
+
+    private final PositionDTOMapper positionMapper;
+
+    BoardDTO map(Board board, String gameId) {
 
         FieldDTO[][] fields = new FieldDTO[board.height()][board.width()];
-        for (FieldDTO[] field : fields) {
-            Arrays.fill(field, new FieldDTO(false));
+        for (int y = 0; y < fields.length; y++) {
+            for (int x=0; x < fields[y].length; x++) {
+                fields[y][x] = new FieldDTO(false, new PositionDTO(x, y));
+            }
         }
 
         for (Ship ship : board.ships()) {
             for (int i = 0; i < ship.length(); i++) {
-                Point point = ship.direction().getCoordinate(ship.start(), i);
-                fields[point.y()][point.x()] = new FieldDTO(true);
+                Position position = ship.direction().getCoordinate(ship.start(), i);
+                fields[position.y()][position.x()] = new FieldDTO(true, positionMapper.map(position));
             }
         }
 
 
-        return new BoardDTO(fields);
+        return new BoardDTO(gameId, fields);
     }
 }

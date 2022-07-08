@@ -1,0 +1,10 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #000000;
+    width: 100px;
+}
+
+.field.ship {
+    background-color: #000000;
+}

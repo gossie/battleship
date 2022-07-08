@@ -11,7 +11,7 @@ class GameDTOMapper {
     private final BoardDTOMapper boardMapper;
 
     GameDTO map(Game game) {
-        return new GameDTO(game.id(), boardMapper.map(game.board()));
+        return new GameDTO(game.id(), boardMapper.map(game.board(), game.id()));
     }
 
 }

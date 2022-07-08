@@ -19,4 +19,10 @@ public class GameService {
     public Optional<Game> findGame(String id) {
         return gameRepository.findById(id);
     }
+
+    public Optional<Game> createShip(String gameId, Ship ship) {
+        return gameRepository.findById(gameId)
+                .map(game -> game.addShip(ship))
+                .map(gameRepository::save);
+    }
 }

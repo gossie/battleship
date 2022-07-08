@@ -20,7 +20,7 @@ export default function GamePage() {
     return (
         <div>
             {selectedShipLength && <div>{selectedShipLength} adjacent cells need to be selected</div>}
-            {game && <BoardComponent board={game.board} />}
+            {game && <BoardComponent onBoardChange={setGame} board={game.board} />}
             <ShipComponent length={4} onSelect={setSelectedShipLength} />
             <ShipComponent length={3} onSelect={setSelectedShipLength} />
             <ShipComponent length={2} onSelect={setSelectedShipLength} />
