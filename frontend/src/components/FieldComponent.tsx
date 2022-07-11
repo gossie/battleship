@@ -7,6 +7,7 @@ interface FieldComponentProps {
     board: Board
     field: Field
     onShipAdd: (g: Game) => void
+    onError: (message: string) => void
 }
 
 export default function FieldComponent(props: FieldComponentProps) {
@@ -18,6 +19,7 @@ export default function FieldComponent(props: FieldComponentProps) {
             direction: direction
         })
         .then(game => props.onShipAdd(game))
+        .catch(() => props.onError('There is a conflict with another ship'))
     }
 
     return (

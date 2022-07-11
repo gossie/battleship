@@ -1,5 +1,7 @@
 package com.github.gossie.battleship.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 
 public enum Direction {
@@ -17,4 +19,12 @@ public enum Direction {
     public Position getCoordinate(Position position, int offset) {
         return f.apply(position, offset);
     }
+    public List<Position> getAllCoordinates(Position start, int length) {
+        List<Position> allCoordinates = new ArrayList<>();
+        for (int i=0; i<length; i++) {
+            allCoordinates.add(getCoordinate(start, i));
+        }
+        return allCoordinates;
+    }
+
 }
