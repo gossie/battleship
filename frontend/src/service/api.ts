@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { Board, Game, Ship } from "./model";
 
-export function startNewGame() {
-    return axios.post("/api/games")
+export function startNewGame(playerName: string) {
+    return axios.post("/api/games", playerName)
         .then((response: AxiosResponse<Game>) => response.data)
 }
 

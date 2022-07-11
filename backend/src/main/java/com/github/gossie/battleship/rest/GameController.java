@@ -16,8 +16,8 @@ public class GameController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public GameDTO createGame() {
-        return gameMapper.map(gameService.createGame());
+    public GameDTO createGame(@RequestBody String playerName) {
+        return gameMapper.map(gameService.createGame(playerName));
     }
 
     @GetMapping("/{id}")

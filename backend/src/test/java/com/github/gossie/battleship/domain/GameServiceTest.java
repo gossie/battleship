@@ -8,10 +8,35 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class GameServiceTest {
+
+    @Test
+    void shouldCreateNoGame_noPlayerName_null() {
+        var gameService = new GameService(null);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> gameService.createGame(null));
+    }
+
+    @Test
+    void shouldCreateNoGame_noPlayerName_empty() {
+        var gameService = new GameService(null);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> gameService.createGame(""));
+    }
+
+    @Test
+    void shouldCreateNoGame_noPlayerName_blank() {
+        var gameService = new GameService(null);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> gameService.createGame(" "));
+    }
 
     @Test
     void shouldCreateGame() {
@@ -22,7 +47,7 @@ class GameServiceTest {
         when(gameRepository.save(gameToBeSaved)).thenReturn(expectedGame);
         var gameService = new GameService(gameRepository);
 
-        var actual = gameService.createGame();
+        var actual = gameService.createGame("player 1");
 
         assertThat(actual).isEqualTo(expectedGame);
     }

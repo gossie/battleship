@@ -12,8 +12,11 @@ public class GameService {
 
     private final GameRepository gameRepository;
 
-    public Game createGame() {
-        return gameRepository.save(new Game(null, new Board(10, 10, new ArrayList<>())));
+    public Game createGame(String playerName) {
+        if (playerName != null && !playerName.isBlank()) {
+            return gameRepository.save(new Game(null, new Board(10, 10, new ArrayList<>())));
+        }
+        throw new IllegalArgumentException();
     }
 
     public Optional<Game> findGame(String id) {
