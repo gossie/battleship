@@ -65,7 +65,55 @@ class GameServiceTest {
         var gameService = new GameService(gameRepository);
 
         Assertions.assertThatExceptionOfType(IllegalStateException.class)
-                .isThrownBy(() -> gameService.createShip("4711", new Ship(new Position(1, 4), 4, Direction.RIGHT)));
+                .isThrownBy(() -> gameService.createShip("4711", new Ship(new Position(2, 3), 4, Direction.DOWN)));
+    }
+
+    @Test
+    void shouldNotCreateShipDueEndOfBoard_left() {
+        var savedGame = new Game("4711", new Board(10, 10, List.of()));
+
+        var gameRepository = mock(GameRepository.class);
+        when(gameRepository.findById("4711")).thenReturn(Optional.of(savedGame));
+        var gameService = new GameService(gameRepository);
+
+        Assertions.assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> gameService.createShip("4711", new Ship(new Position(0, 2), 4, Direction.LEFT)));
+    }
+
+    @Test
+    void shouldNotCreateShipDueEndOfBoard_right() {
+        var savedGame = new Game("4711", new Board(10, 10, List.of()));
+
+        var gameRepository = mock(GameRepository.class);
+        when(gameRepository.findById("4711")).thenReturn(Optional.of(savedGame));
+        var gameService = new GameService(gameRepository);
+
+        Assertions.assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> gameService.createShip("4711", new Ship(new Position(7, 5), 4, Direction.RIGHT)));
+    }
+
+    @Test
+    void shouldNotCreateShipDueEndOfBoard_up() {
+        var savedGame = new Game("4711", new Board(10, 10, List.of()));
+
+        var gameRepository = mock(GameRepository.class);
+        when(gameRepository.findById("4711")).thenReturn(Optional.of(savedGame));
+        var gameService = new GameService(gameRepository);
+
+        Assertions.assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> gameService.createShip("4711", new Ship(new Position(5, 2), 4, Direction.UP)));
+    }
+
+    @Test
+    void shouldNotCreateShipDueEndOfBoard_down() {
+        var savedGame = new Game("4711", new Board(10, 10, List.of()));
+
+        var gameRepository = mock(GameRepository.class);
+        when(gameRepository.findById("4711")).thenReturn(Optional.of(savedGame));
+        var gameService = new GameService(gameRepository);
+
+        Assertions.assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> gameService.createShip("4711", new Ship(new Position(5, 7), 4, Direction.DOWN)));
     }
 
 }
