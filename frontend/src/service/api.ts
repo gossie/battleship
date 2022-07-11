@@ -2,8 +2,21 @@ import axios, { AxiosResponse } from "axios";
 import { Board, Game, Ship } from "./model";
 
 export function startNewGame(playerName: string) {
-    return axios.post("/api/games", playerName)
-        .then((response: AxiosResponse<Game>) => response.data)
+    return axios.post("/api/games", playerName, {
+        headers: {
+            'Content-Type': 'text/plain'
+        }
+    })
+    .then((response: AxiosResponse<Game>) => response.data)
+}
+
+export function loadGame(gameId: string, playerName: string) {
+    return axios.patch(`/api/games/${gameId}`, playerName, {
+        headers: {
+            'Content-Type': 'text/plain'
+        }
+    })
+    .then((response: AxiosResponse<Game>) => response.data)
 }
 
 export function getGame(id: string) {

@@ -15,9 +15,17 @@ public class GameController {
     private final GameDTOMapper gameMapper;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public GameDTO createGame(@RequestBody String playerName) {
-        return gameMapper.map(gameService.createGame(playerName));
+    public ResponseEntity<GameDTO> createGame(@RequestBody String playerName) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(gameMapper.map(gameService.createGame(playerName)));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<GameDTO> loadGame(@PathVariable String id, @RequestBody String playerName) {
+        return ResponseEntity.of(gameService.addPlayer(id, playerName).map(gameMapper::map));
     }
 
     @GetMapping("/{id}")

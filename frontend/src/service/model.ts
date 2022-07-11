@@ -1,7 +1,12 @@
 export interface Game {
     id: string
     board: Board
+    players: Array<Player>
     links: Array<Link>
+}
+
+export interface Player {
+    name: string
 }
 
 export interface Board {

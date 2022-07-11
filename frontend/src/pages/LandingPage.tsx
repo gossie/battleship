@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { startNewGame } from "../service/api";
+import { loadGame, startNewGame } from "../service/api";
 
 import './LandingPage.css';
 
@@ -28,7 +28,8 @@ export default function LandingPage() {
     
     const joinGame = () => {
         if (playerName && gameId) {
-            nav(`/game/${gameId}`)
+            loadGame(gameId, playerName)
+                .then(game => nav(`/game/${game.id}`))
         } else {
             setErrorMessage(`${playerName ? '' : 'You need to tell us who you are.'} ${gameId ? '' : 'You need to specify the game you want to join.'}`)
        }
