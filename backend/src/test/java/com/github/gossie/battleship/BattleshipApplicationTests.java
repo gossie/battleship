@@ -18,7 +18,7 @@ class BattleshipApplicationTests {
 
 	@Test
 	void contextLoads() {
-		ResponseEntity<TestGameDTO> createGameResponse = restTemplate.postForEntity("/api/games", null, TestGameDTO.class);
+		ResponseEntity<TestGameDTO> createGameResponse = restTemplate.postForEntity("/api/games", "Player 1", TestGameDTO.class);
 		assertThat(createGameResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
 		String selfHref = createGameResponse.getBody().links().stream()

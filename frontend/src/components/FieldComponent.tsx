@@ -6,6 +6,7 @@ import './FieldComponent.css';
 interface FieldComponentProps {
     board: Board
     field: Field
+    shipLength: number
     onShipAdd: (g: Game) => void
     onError: (message: string) => void
 }
@@ -15,7 +16,7 @@ export default function FieldComponent(props: FieldComponentProps) {
     const select = (direction: Direction) => {
         addShip(props.board, {
             start: props.field.position,
-            length: 4,
+            length: props.shipLength,
             direction: direction
         })
         .then(game => props.onShipAdd(game))

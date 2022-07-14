@@ -1,11 +1,17 @@
 export interface Game {
     id: string
     board: Board
+    players: Array<Player>
     links: Array<Link>
+}
+
+export interface Player {
+    name: string
 }
 
 export interface Board {
     fields: Array<Array<Field>>
+    ships: Array<Ship>
     links: Array<Link>
 }
 

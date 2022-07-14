@@ -4,10 +4,20 @@ import java.util.List;
 
 public record Board(int width, int height, List<Ship> ships) {
     public void addShip(Ship ship) {
+        checkShipLength(ship);
         checkBoardBorder(ship);
         checkCollision(ship);
 
         ships.add(ship);
+    }
+
+    private void checkShipLength(Ship ship) {
+        ships.stream()
+                .filter(s -> s.length() == ship.length())
+                .findFirst()
+                .ifPresent(s -> {
+                    throw new IllegalStateException();
+                });
     }
 
     private void checkBoardBorder(Ship ship) {

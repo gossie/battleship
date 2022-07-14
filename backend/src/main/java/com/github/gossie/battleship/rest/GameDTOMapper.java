@@ -9,9 +9,14 @@ import org.springframework.stereotype.Component;
 class GameDTOMapper {
 
     private final BoardDTOMapper boardMapper;
+    private final PlayerDTOMapper playerMapper;
 
     GameDTO map(Game game) {
-        return new GameDTO(game.id(), boardMapper.map(game.board(), game.id()));
+        return new GameDTO(
+                game.id(),
+                boardMapper.map(game.board(), game.id()),
+                game.players().stream().map(playerMapper::map).toList()
+        );
     }
 
 }
