@@ -11,6 +11,7 @@ export interface Player {
 
 export interface Board {
     fields: Array<Array<Field>>
+    ships: Array<Ship>
     links: Array<Link>
 }
 

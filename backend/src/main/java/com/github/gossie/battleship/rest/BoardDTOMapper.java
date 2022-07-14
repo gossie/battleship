@@ -13,6 +13,7 @@ import java.util.Arrays;
 class BoardDTOMapper {
 
     private final PositionDTOMapper positionMapper;
+    private final ShipDTOMapper shipMapper;
 
     BoardDTO map(Board board, String gameId) {
 
@@ -30,7 +31,6 @@ class BoardDTOMapper {
             }
         }
 
-
-        return new BoardDTO(gameId, fields);
+        return new BoardDTO(gameId, fields, board.ships().stream().map(shipMapper::map).toList());
     }
 }

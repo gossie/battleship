@@ -13,4 +13,8 @@ class ShipDTOMapper {
     Ship map(ShipDTO ship) {
         return new Ship(positionMapper.map(ship.start()), ship.length(), ship.direction());
     }
+
+    ShipDTO map(Ship ship) {
+        return new ShipDTO(positionMapper.map(ship.start()), ship.length(), ship.direction());
+    }
 }

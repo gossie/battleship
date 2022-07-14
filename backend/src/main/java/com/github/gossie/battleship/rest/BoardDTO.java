@@ -5,7 +5,7 @@ import org.springframework.hateoas.Link;
 
 import java.util.List;
 
-record BoardDTO(@JsonIgnore String gameId, FieldDTO[][] fields) {
+record BoardDTO(@JsonIgnore String gameId, FieldDTO[][] fields, List<ShipDTO> ships) {
 
     public List<Link> getLinks() {
         return List.of(

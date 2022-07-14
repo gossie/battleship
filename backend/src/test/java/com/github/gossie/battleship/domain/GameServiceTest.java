@@ -142,6 +142,18 @@ class GameServiceTest {
     }
 
     @Test
+    void shouldNotCreateShip_lengthAlreadyPresent() {
+        var savedGame = new Game("4711", new Board(10, 10, List.of(new Ship(new Position(1, 1), 4, Direction.RIGHT))), List.of(new Player("player 1")));
+
+        var gameRepository = mock(GameRepository.class);
+        when(gameRepository.findById("4711")).thenReturn(Optional.of(savedGame));
+        var gameService = new GameService(gameRepository);
+
+        Assertions.assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> gameService.createShip("4711", new Ship(new Position(1, 3), 4, Direction.DOWN)));
+    }
+
+    @Test
     void shouldNotAddPlayer_noPlayerName_null() {
         var gameService = new GameService(null);
 
